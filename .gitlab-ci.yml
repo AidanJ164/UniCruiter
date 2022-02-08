@@ -1,0 +1,18 @@
+stages:
+  - build
+
+build:
+  stage: build
+  tags: 
+    - csc340
+  only:
+    - main
+  script:
+    - cd Team5
+    - dotnet restore
+    - dotnet build --configuration Release
+    - dotnet publish --configuration Release --output ../publish/
+  artifacts:
+    paths:
+      - ./publish/*.*
+    expire_in: 1 week
