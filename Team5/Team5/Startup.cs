@@ -26,6 +26,12 @@ namespace Team5
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
+
+            /*
+            services.AddDbContext<Team5Context>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("Team5Context")));
+            */
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
