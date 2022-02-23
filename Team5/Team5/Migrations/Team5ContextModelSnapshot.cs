@@ -43,6 +43,7 @@ namespace Team5.Migrations
                 b.ToTable("Student");
             });
 
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -70,6 +71,7 @@ namespace Team5.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -93,6 +95,7 @@ namespace Team5.Migrations
 
                     b.ToTable("AspNetRoleClaims");
                 });
+
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
                 {
@@ -159,6 +162,7 @@ namespace Team5.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -182,6 +186,7 @@ namespace Team5.Migrations
 
                     b.ToTable("AspNetUserClaims");
                 });
+
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
@@ -207,6 +212,7 @@ namespace Team5.Migrations
                     b.ToTable("AspNetUserLogins");
                 });
 
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.Property<string>("UserId")
@@ -221,6 +227,7 @@ namespace Team5.Migrations
 
                     b.ToTable("AspNetUserRoles");
                 });
+
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
@@ -243,6 +250,7 @@ namespace Team5.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -251,6 +259,7 @@ namespace Team5.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
+
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
@@ -261,6 +270,7 @@ namespace Team5.Migrations
                         .IsRequired();
                 });
 
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
@@ -269,6 +279,7 @@ namespace Team5.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
+
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
@@ -284,6 +295,7 @@ namespace Team5.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
+
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
