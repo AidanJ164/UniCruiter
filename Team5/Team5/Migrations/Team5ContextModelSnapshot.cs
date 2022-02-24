@@ -19,6 +19,31 @@ namespace Team5.Migrations
                 .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Team5.Models.Student", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                b.Property<string>("FirstName")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<DateTime>("GradDate")
+                    .HasColumnType("datetime2");
+
+                b.Property<string>("LastName")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("Major")
+                    .HasColumnType("nvarchar(max)");
+
+                b.HasKey("Id");
+
+                b.ToTable("Student");
+            });
+
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -181,6 +206,7 @@ namespace Team5.Migrations
                     b.ToTable("AspNetUserLogins");
                 });
 
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.Property<string>("UserId")
@@ -195,6 +221,7 @@ namespace Team5.Migrations
 
                     b.ToTable("AspNetUserRoles");
                 });
+
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
