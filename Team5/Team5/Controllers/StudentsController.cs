@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Team5.Data;
 using Team5.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Team5.Controllers
 {
+    [Authorize]
     public class StudentsController : Controller
     {
         private readonly Team5Context _context;
