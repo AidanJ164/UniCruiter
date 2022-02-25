@@ -12,6 +12,5 @@ namespace Team5.Models
 
         [DataType(DataType.Date)]
         public DateTime GradDate { get; set; }
-        
     }
 }
