@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using Team5.Data;
 using Team5.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace MvcStudent.Models
 {
@@ -18,6 +19,14 @@ namespace MvcStudent.Models
                 serviceProvider.GetRequiredService<
                     DbContextOptions<Team5Context>>()))
             {
+                // Look for any Users.
+                if (!context.Users.Any())
+                {
+                    SeedUsers(context);
+                    context.SaveChanges();
+                }
+
+
                 // Look for any Students.
                 if (context.Student.Any())
                 {
@@ -27,6 +36,39 @@ namespace MvcStudent.Models
                 SeedStudents(context);
             }
         }
+
+        private static void SeedUsers(Team5Context context)
+        {
+            string recruiter1 = "test1@example.com";
+            string recruiter2 = "test2@example.com";
+
+            var user1 = new IdentityUser
+            {
+                UserName = recruiter1,
+                NormalizedUserName = recruiter1.ToUpper(),
+                Email = recruiter1,
+                NormalizedEmail = recruiter1.ToUpper(),
+                EmailConfirmed = true
+            };
+
+            var user2 = new IdentityUser
+            {
+                UserName = recruiter2,
+                NormalizedUserName = recruiter2.ToUpper(),
+                Email = recruiter2,
+                NormalizedEmail = recruiter2.ToUpper(),
+                EmailConfirmed = true
+            };
+
+            PasswordHasher<IdentityUser> passwordHasher = new PasswordHasher<IdentityUser>();
+            string passwordHash = passwordHasher.HashPassword(user1, "Test1!");
+            user1.PasswordHash = passwordHash;
+            user2.PasswordHash = passwordHash;
+
+            context.Users.Add(user1);
+            context.Users.Add(user2);
+        }
+
 
         private static void SeedStudents(Team5Context context)
         {
