@@ -1,4 +1,6 @@
-# Team 5
+# UniCruiter
+
+![logo](titletransparent.png "UniCruiter Logo")
 
 - Joshua Crawford
 - Aidan Justice
