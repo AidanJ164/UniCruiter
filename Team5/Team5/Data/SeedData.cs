@@ -9,7 +9,7 @@ using Team5.Data;
 using Team5.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace MvcStudent.Models
+namespace Team5.Data.SeedData
 {
     public static class SeedData
     {
