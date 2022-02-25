@@ -43,7 +43,12 @@ namespace MvcStudent.Models
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))
             using (StreamReader reader = new StreamReader(stream))
             {
+
+                // Read the header.
                 string header = reader.ReadLine();
+
+                // Read the rows and create Student entities.
+
                 while ((line = reader.ReadLine()) != null)
                 {
                     // Writes to the Output Window.
@@ -57,7 +62,16 @@ namespace MvcStudent.Models
                     context.Student.Add(
                         new Student
                         {
-                            Id = int.Parse(values[0]),
+                            // Butterfield - 2/24/22
+                            // SaveChanges() Error:  Cannot insert explicit value for identity column in table 'Student'
+                            // when IDENTITY_INSERT is set to OFF.
+                            //
+                            // Since the Student:Id field is auto-incremented on the database by configuration
+                            // in entity framework, the setting of the Id needs to be ignored.  The Id should
+                            // not be present in the CSV file.
+                            //
+                            //Id = int.Parse(values[0]),
+
                             FirstName = values[1],
                             LastName = values[2],
                             Major = values[3],
@@ -65,6 +79,7 @@ namespace MvcStudent.Models
                         }
                     );
                 }
+
                 context.SaveChanges();
             }
         }
