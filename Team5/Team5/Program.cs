@@ -2,13 +2,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Team5.Data;
-using Team5.Models;
 using System;
-using MvcStudent.Models;
-using Team5;
+using Team5.Data.SeedData;
 
-namespace MvcMovie
+namespace Team5
 {
     public class Program
     {
