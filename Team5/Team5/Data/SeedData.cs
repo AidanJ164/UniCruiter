@@ -117,7 +117,8 @@ namespace Team5.Data.SeedData
                             FirstName = values[1],
                             LastName = values[2],
                             Major = values[3],
-                            GradDate = DateTime.Parse(values[4])
+                            Season = values[4],
+                            Year = int.Parse(values[5])
                         }
                     );
                 }
