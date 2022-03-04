@@ -9,8 +9,7 @@ namespace Team5.Models
         public string FirstName { get; set; }  
         public string LastName { get; set; }
         public string Major { get; set; }
-
-        [DataType(DataType.Date)]
-        public DateTime GradDate { get; set; }
+        public string Season { get; set; }
+        public int Year { get; set; }
     }
 }
