@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Team5.Services
+namespace UniCruiter.Services
 {
     public class AuthMessageSenderOptions
     {

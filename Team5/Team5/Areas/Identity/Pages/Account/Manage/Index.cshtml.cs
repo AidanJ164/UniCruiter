@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Team5.Areas.Identity.Pages.Account.Manage
+namespace UniCruiter.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {

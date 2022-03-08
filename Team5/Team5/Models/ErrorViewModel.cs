@@ -1,6 +1,6 @@
 using System;
 
-namespace Team5.Models
+namespace UniCruiter.Models
 {
     public class ErrorViewModel
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Team5.Migrations
+namespace UniCruiter.Migrations
 {
     public partial class InitialCreate : Migration
     {

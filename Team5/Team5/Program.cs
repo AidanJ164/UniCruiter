@@ -3,9 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
-using Team5.Data.SeedData;
+using UniCruiter.Data.SeedData;
 
-namespace Team5
+namespace UniCruiter
 {
     public class Program
     {

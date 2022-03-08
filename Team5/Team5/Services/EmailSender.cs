@@ -9,7 +9,7 @@ using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 
-namespace Team5.Services
+namespace UniCruiter.Services
 {
 
     public class EmailSender : IEmailSender

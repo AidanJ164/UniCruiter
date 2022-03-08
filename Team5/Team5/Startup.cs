@@ -9,12 +9,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Team5.Data;
-using Team5.Services;
+using UniCruiter.Data;
+using UniCruiter.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 
-namespace Team5
+namespace UniCruiter
 {
     public class Startup
     {
@@ -30,11 +30,11 @@ namespace Team5
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<Team5Context>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("Team5Context")));
+            services.AddDbContext<UniCruiterContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("UniCruiterContext")));
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<Team5Context>();
+                .AddEntityFrameworkStores<UniCruiterContext>();
 
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);

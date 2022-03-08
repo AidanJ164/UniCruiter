@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Team5.Models
+namespace UniCruiter.Models
 {
     public class Student
     {
