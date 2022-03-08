@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Team5.Data;
 using Team5.Models;
+using Team5.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Team5.Controllers
@@ -22,9 +23,27 @@ namespace Team5.Controllers
         }
 
         // GET: Students
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchFirst, string searchLast)
         {
-            return View(await _context.Student.ToListAsync());
+            var students = from s in _context.Student
+                           select s;
+
+            if(!string.IsNullOrEmpty(searchFirst))
+            {
+                students = students.Where(f => f.FirstName.Contains(searchFirst));
+            }
+
+            if(!string.IsNullOrEmpty(searchLast))
+            {
+                students = students.Where(l => l.LastName.Contains(searchLast));
+            }
+
+            var studentVM = new StudentSearchViewModel
+            {
+                Students = await students.ToListAsync()
+            };
+
+            return View(studentVM);
         }
 
         // GET: Students/Details/5
