@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Team5.Data;
+using UniCruiter.Data;
 
-namespace Team5.Migrations
+namespace UniCruiter.Migrations
 {
-    [DbContext(typeof(Team5Context))]
-    partial class Team5ContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(UniCruiterContext))]
+    partial class UniCruiterContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -219,7 +219,7 @@ namespace Team5.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Team5.Models.Student", b =>
+            modelBuilder.Entity("UniCruiter.Models.Student", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

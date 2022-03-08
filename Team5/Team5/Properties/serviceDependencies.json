@@ -2,7 +2,7 @@
   "dependencies": {
     "mssql1": {
       "type": "mssql",
-      "connectionId": "ConnectionStrings:Team5Context"
+      "connectionId": "ConnectionStrings:UniCruiterContext"
     }
   }
 }

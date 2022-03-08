@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Team5.Models;
+using UniCruiter.Models;
 
-namespace Team5.Controllers
+namespace UniCruiter.Controllers
 {
     public class HomeController : Controller
     {

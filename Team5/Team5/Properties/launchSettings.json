@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Team5": {
+    "UniCruiter": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

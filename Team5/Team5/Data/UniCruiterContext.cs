@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Team5.Models;
+using UniCruiter.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace Team5.Data
+namespace UniCruiter.Data
 {
-    public class Team5Context : IdentityDbContext
+    public class UniCruiterContext : IdentityDbContext
     {
-        public Team5Context (DbContextOptions<Team5Context> options)
+        public UniCruiterContext (DbContextOptions<UniCruiterContext> options)
             : base(options)
         {
         }
 
-        public DbSet<Team5.Models.Student> Student { get; set; }
+        public DbSet<UniCruiter.Models.Student> Student { get; set; }
     }
 }

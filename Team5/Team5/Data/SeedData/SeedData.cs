@@ -5,19 +5,19 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Team5.Data;
-using Team5.Models;
+using UniCruiter.Data;
+using UniCruiter.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace Team5.Data.SeedData
+namespace UniCruiter.Data.SeedData
 {
     public static class SeedData
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using (var context = new Team5Context(
+            using (var context = new UniCruiterContext(
                 serviceProvider.GetRequiredService<
-                    DbContextOptions<Team5Context>>()))
+                    DbContextOptions<UniCruiterContext>>()))
             {
                 // Look for any Users.
                 if (!context.Users.Any())
@@ -37,7 +37,7 @@ namespace Team5.Data.SeedData
             }
         }
 
-        private static void SeedUsers(Team5Context context)
+        private static void SeedUsers(UniCruiterContext context)
         {
             string recruiter1 = "test1@example.com";
             string recruiter2 = "test2@example.com";
@@ -70,7 +70,7 @@ namespace Team5.Data.SeedData
         }
 
 
-        private static void SeedStudents(Team5Context context)
+        private static void SeedStudents(UniCruiterContext context)
         {
             var assembly = Assembly.GetExecutingAssembly();
 
@@ -79,7 +79,7 @@ namespace Team5.Data.SeedData
             // to be assigned to the resourceName variable below.
             string[] resourceNames = assembly.GetManifestResourceNames();
 
-            string resourceName = "Team5.Data.SeedData.Students.csv";
+            string resourceName = "UniCruiter.Data.SeedData.Students.csv";
             string line;
 
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))

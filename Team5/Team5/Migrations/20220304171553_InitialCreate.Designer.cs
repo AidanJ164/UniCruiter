@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Team5.Data;
+using UniCruiter.Data;
 
-namespace Team5.Migrations
+namespace UniCruiter.Migrations
 {
-    [DbContext(typeof(Team5Context))]
+    [DbContext(typeof(UniCruiterContext))]
     [Migration("20220304171553_InitialCreate")]
     partial class InitialCreate
     {
@@ -221,7 +221,7 @@ namespace Team5.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Team5.Models.Student", b =>
+            modelBuilder.Entity("UniCruiter.Models.Student", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
-using Team5.Models;
+using UniCruiter.Models;
 
-namespace Team5.ViewModels
+namespace UniCruiter.ViewModels
 {
     public class StudentSearchViewModel
     {

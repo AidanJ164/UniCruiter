@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Team5.Data;
+using UniCruiter.Data;
 
-[assembly: HostingStartup(typeof(Team5.Areas.Identity.IdentityHostingStartup))]
-namespace Team5.Areas.Identity
+[assembly: HostingStartup(typeof(UniCruiter.Areas.Identity.IdentityHostingStartup))]
+namespace UniCruiter.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup
     {

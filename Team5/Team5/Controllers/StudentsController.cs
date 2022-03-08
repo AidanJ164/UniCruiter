@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Team5.Data;
-using Team5.Models;
-using Team5.ViewModels;
-using Microsoft.AspNetCore.Authorization;
+using UniCruiter.Data;
+using UniCruiter.Models;
+using UniCruiter.ViewModels;
 
-namespace Team5.Controllers
+namespace UniCruiter.Controllers
 {
     [Authorize]
     public class StudentsController : Controller
     {
-        private readonly Team5Context _context;
+        private readonly UniCruiterContext _context;
 
-        public StudentsController(Team5Context context)
+        public StudentsController(UniCruiterContext context)
         {
             _context = context;
         }
