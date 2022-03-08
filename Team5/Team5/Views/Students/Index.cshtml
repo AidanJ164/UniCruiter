@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Team5.Models.Student>
+﻿@model Team5.ViewModels.StudentSearchViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -9,29 +9,37 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<form asp-controller="Students" asp-action="Index" method="get">
+    <p>
+        First Name: <input type ="text" asp-for="SearchFirst" />
+        Last Name: <input type ="text" asp-for="SearchLast" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
+                @Html.DisplayNameFor(model => model.Students[0].FirstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastName)
+                @Html.DisplayNameFor(model => model.Students[0].LastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Major)
+                @Html.DisplayNameFor(model => model.Students[0].Major)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Season)
+                @Html.DisplayNameFor(model => model.Students[0].Season)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Year)
+                @Html.DisplayNameFor(model => model.Students[0].Year)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Students) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
