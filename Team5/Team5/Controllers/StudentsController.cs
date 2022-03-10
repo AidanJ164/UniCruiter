@@ -23,24 +23,75 @@ namespace UniCruiter.Controllers
         }
 
         // GET: Students
-        public async Task<IActionResult> Index(string searchFirst, string searchLast)
+        public async Task<IActionResult> Index(string searchFirst, string searchLast, string sortOrder, string major, string season, string year)
         {
+            ViewData["SeasonSortParam"] = sortOrder == "Season" ? "season_desc" : "Season";
+            ViewData["YearSortParam"] = sortOrder == "Year" ? "year_desc" : "Year";
+            ViewData["MajorSortParam"] = sortOrder == "Major" ? "major_desc" : "Major";
+
+            IQueryable<string> majorQuery = from m in _context.Student orderby m.Major select m.Major;
+            IQueryable<int> yearQuery = from y in _context.Student orderby y.Year select y.Year;
+            IQueryable<string> seasonQuery = from s in _context.Student orderby s.Season select s.Season;
+
             var students = from s in _context.Student
                            select s;
 
-            if(!string.IsNullOrEmpty(searchFirst))
+            if (!string.IsNullOrEmpty(searchFirst))
             {
-                    students = students.Where(f => f.FirstName.Trim().StartsWith(searchFirst));
+                students = students.Where(f => f.FirstName.Trim().StartsWith(searchFirst));
             }
 
-            if(!string.IsNullOrEmpty(searchLast))
+            if (!string.IsNullOrEmpty(searchLast))
             {
                 students = students.Where(l => l.LastName.Trim().StartsWith(searchLast));
             }
 
+            if(!string.IsNullOrEmpty(major))
+            {
+                students = students.Where(s => s.Major == major);
+            }
+
+            if (!string.IsNullOrEmpty(season))
+            {
+                students = students.Where(s => s.Season == season);
+            }
+
+            if (!string.IsNullOrEmpty(year))
+            {
+                students = students.Where(s => s.Year.ToString() == year);
+            }
+
+            switch (sortOrder)
+            {
+                case "Season":
+                    students = students.OrderBy(s => s.Season);
+                    break;
+                case "season_desc":
+                    students = students.OrderByDescending(s => s.Season);
+                    break;
+                case "Year":
+                    students = students.OrderBy(s => s.Year);
+                    break;
+                case "year_desc":
+                    students = students.OrderByDescending(s => s.Year);
+                    break;
+                case "Major":
+                    students = students.OrderBy(s => s.Major);
+                    break;
+                case "major_desc":
+                    students = students.OrderByDescending(s => s.Major);
+                    break;
+                default:
+                    students = students.OrderBy(s => s.LastName);
+                    break;
+            }
+
             var studentVM = new StudentSearchViewModel
             {
-                Students = await students.ToListAsync()
+                Majors = new SelectList(await majorQuery.Distinct().ToListAsync()),
+                Seasons = new SelectList(await seasonQuery.Distinct().ToListAsync()),
+                Years = new SelectList(await yearQuery.Distinct().ToListAsync()),
+                Students = await students.AsNoTracking().ToListAsync()
             };
 
             return View(studentVM);
