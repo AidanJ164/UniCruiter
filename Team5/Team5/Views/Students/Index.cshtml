@@ -11,8 +11,19 @@
 </p>
 <form asp-controller="Students" asp-action="Index" method="get">
     <p>
-        First Name: <input type ="text" asp-for="SearchFirst" />
-        Last Name: <input type ="text" asp-for="SearchLast" />
+        <select asp-for="Major" asp-items="Model.Majors">
+            <option value="">All Majors</option>
+        </select>
+
+        <select asp-for="Season" asp-items="Model.Seasons">
+            <option value="">All Seasons</option>
+        </select>
+
+        <select asp-for="Year" asp-items="Model.Years">
+            <option value="">All Years</option>
+        </select>
+        First Name: <input type="text" asp-for="SearchFirst" />
+        Last Name: <input type="text" asp-for="SearchLast" />
         <input type="submit" value="Filter" />
     </p>
 </form>
@@ -27,15 +38,15 @@
                 @Html.DisplayNameFor(model => model.Students[0].LastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Students[0].Major)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["MajorSortParam"]">@Html.DisplayNameFor(model => model.Students[0].Major)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Students[0].Season)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["SeasonSortParam"]">@Html.DisplayNameFor(model => model.Students[0].Season)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Students[0].Year)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["YearSortParam"]">@Html.DisplayNameFor(model => model.Students[0].Year)</a>
             </th>
-            <th></th>
+            <th>
         </tr>
     </thead>
     <tbody>

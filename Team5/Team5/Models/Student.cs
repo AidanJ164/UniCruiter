@@ -25,7 +25,7 @@ namespace UniCruiter.Models
         public string Major { get; set; }
 
         [StringLength(6, MinimumLength = 4)]
-        [RegularExpression(@"[A-Z]*$")]
+        [RegularExpression(@"[A-Z]")]
         [Required]
         public string Season { get; set; }
 
