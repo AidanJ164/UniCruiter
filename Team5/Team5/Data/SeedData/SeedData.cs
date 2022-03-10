@@ -1,13 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using UniCruiter.Data;
 using UniCruiter.Models;
-using Microsoft.AspNetCore.Identity;
 
 namespace UniCruiter.Data.SeedData
 {
