@@ -30,12 +30,12 @@ namespace UniCruiter.Controllers
 
             if(!string.IsNullOrEmpty(searchFirst))
             {
-                students = students.Where(f => f.FirstName.Contains(searchFirst));
+                    students = students.Where(f => f.FirstName.Trim().StartsWith(searchFirst));
             }
 
             if(!string.IsNullOrEmpty(searchLast))
             {
-                students = students.Where(l => l.LastName.Contains(searchLast));
+                students = students.Where(l => l.LastName.Trim().StartsWith(searchLast));
             }
 
             var studentVM = new StudentSearchViewModel
