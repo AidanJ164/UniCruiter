@@ -117,7 +117,8 @@ namespace UniCruiter.Data.SeedData
                             LastName = values[2],
                             Major = values[3],
                             Season = values[4],
-                            Year = int.Parse(values[5])
+                            Year = int.Parse(values[5]),
+                            Email = values[6]
                         }
                     );
                 }

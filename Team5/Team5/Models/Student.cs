@@ -28,5 +28,6 @@ namespace UniCruiter.Models
         [Range(2022, 3000)]
         [Required]
         public int Year { get; set; }
+        public string Email { get; set; }
     }
 }

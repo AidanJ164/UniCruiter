@@ -47,6 +47,9 @@
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["YearSortParam"]">@Html.DisplayNameFor(model => model.Students[0].Year)</a>
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Students[0].Email)
+            </th>
+            <th>
         </tr>
     </thead>
     <tbody>
@@ -66,6 +69,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
