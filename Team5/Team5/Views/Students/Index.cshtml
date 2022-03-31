@@ -22,10 +22,9 @@
         <select asp-for="Year" asp-items="Model.Years">
             <option value="">All Years</option>
         </select>
-        First Name: <input type="text" asp-for="FirstName" />
-        Last Name: <input type="text" asp-for="LastName" />
+        First Name: <input type="text" asp-for="SearchFirst" />
+        Last Name: <input type="text" asp-for="SearchLast" />
         <input type="submit" value="Filter" />
-        @Html.ActionLink("Reset All", "", new { @class = "btn btn-sm btn-primary" })
     </p>
 </form>
 
@@ -39,13 +38,13 @@
                 @Html.DisplayNameFor(model => model.LastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Major)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["MajorSortParam"]">@Html.DisplayNameFor(model => model.Major)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Season)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["SeasonSortParam"]">@Html.DisplayNameFor(model => model.Season)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Year)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["YearSortParam"]">@Html.DisplayNameFor(model => model.Year)</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Email)
