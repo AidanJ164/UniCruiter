@@ -1,4 +1,4 @@
-﻿@model UniCruiter.ViewModels.StudentSearchViewModel
+﻿@model UniCruiter.ViewModels.StudentViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -32,22 +32,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Students[0].FirstName)
+                @Html.DisplayNameFor(model => model.FirstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Students[0].LastName)
+                @Html.DisplayNameFor(model => model.LastName)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["MajorSortParam"]">@Html.DisplayNameFor(model => model.Students[0].Major)</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["MajorSortParam"]">@Html.DisplayNameFor(model => model.Major)</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["SeasonSortParam"]">@Html.DisplayNameFor(model => model.Students[0].Season)</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["SeasonSortParam"]">@Html.DisplayNameFor(model => model.Season)</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["YearSortParam"]">@Html.DisplayNameFor(model => model.Students[0].Year)</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["YearSortParam"]">@Html.DisplayNameFor(model => model.Year)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Students[0].Email)
+                @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
         </tr>
