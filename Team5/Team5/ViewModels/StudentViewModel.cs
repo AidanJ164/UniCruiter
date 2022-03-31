@@ -57,7 +57,5 @@ namespace UniCruiter.ViewModels
         public SelectList Majors;
         public SelectList Years;
         public SelectList Seasons;
-        public string SearchFirst;
-        public string SearchLast;
     }
 }
