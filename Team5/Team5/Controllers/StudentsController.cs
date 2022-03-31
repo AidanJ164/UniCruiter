@@ -85,7 +85,7 @@ namespace UniCruiter.Controllers
                     break;
             }
 
-            var studentVM = new StudentSearchViewModel
+            var studentVM = new StudentViewModel
             {
                 Majors = new SelectList(await majorQuery.Distinct().ToListAsync()),
                 Seasons = new SelectList(await seasonQuery.Distinct().ToListAsync()),
@@ -106,12 +106,15 @@ namespace UniCruiter.Controllers
 
             var student = await _context.Student
                 .FirstOrDefaultAsync(m => m.Id == id);
+
+            var studentVM = new StudentViewModel(student);
+
             if (student == null)
             {
                 return NotFound();
             }
 
-            return View(student);
+            return View(studentVM);
         }
 
         // GET: Students/Create
@@ -125,8 +128,19 @@ namespace UniCruiter.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Major,Season,Year,Email")] Student student)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Major,Season,Year,Email")] StudentViewModel studentVM)
         {
+            var student = new Student()
+            {
+                Id = studentVM.Id,
+                FirstName = studentVM.FirstName,
+                LastName = studentVM.LastName,
+                Major = studentVM.Major,
+                Season = studentVM.Season,
+                Year = studentVM.Year,
+                Email = studentVM.Email
+            };
+
             if (ModelState.IsValid)
             {
                 _context.Add(student);
@@ -145,11 +159,14 @@ namespace UniCruiter.Controllers
             }
 
             var student = await _context.Student.FindAsync(id);
+
+            var studentVM = new StudentViewModel(student);
+
             if (student == null)
             {
                 return NotFound();
             }
-            return View(student);
+            return View(studentVM);
         }
 
         // POST: Students/Edit/5
@@ -157,12 +174,24 @@ namespace UniCruiter.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Major,Season,Year,Email")] Student student)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Major,Season,Year,Email")]
+                                              StudentViewModel studentVM)
         {
-            if (id != student.Id)
+            if (id != studentVM.Id)
             {
                 return NotFound();
             }
+
+            var student = new Student
+            {
+                Id = studentVM.Id,
+                FirstName = studentVM.FirstName,
+                LastName = studentVM.LastName,
+                Major = studentVM.Major,
+                Season = studentVM.Season,
+                Year = studentVM.Year,
+                Email = studentVM.Email
+            };
 
             if (ModelState.IsValid)
             {
@@ -202,7 +231,9 @@ namespace UniCruiter.Controllers
                 return NotFound();
             }
 
-            return View(student);
+            var studentVM = new StudentViewModel(student);
+
+            return View(studentVM);
         }
 
         // POST: Students/Delete/5
