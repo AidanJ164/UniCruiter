@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using UniCruiter.Data;
+using UniCruiter.Repository;
 using UniCruiter.Services;
 
 namespace UniCruiter
@@ -31,8 +32,12 @@ namespace UniCruiter
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<UniCruiterContext>();
 
+            // used for SendGrid email service.
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
+
+            // used for repository pattern.
+            services.AddScoped<IStudentRepository, StudentRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
