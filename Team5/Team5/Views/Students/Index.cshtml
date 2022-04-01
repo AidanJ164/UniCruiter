@@ -11,20 +11,28 @@
 </p>
 <form asp-controller="Students" asp-action="Index" method="get">
     <p>
+        <label asp-for="Major"></label>
         <select asp-for="Major" asp-items="Model.Majors">
             <option value="">All Majors</option>
         </select>
-
+        &nbsp;
+        <label asp-for="Year"></label>
+        <select asp-for="Year" asp-items="Model.Years">
+            <option value="">All Years</option>
+        </select>
+        &nbsp;
+        <label asp-for="Season"></label>
         <select asp-for="Season" asp-items="Model.Seasons">
             <option value="">All Seasons</option>
         </select>
 
-        <select asp-for="Year" asp-items="Model.Years">
-            <option value="">All Years</option>
-        </select>
+        <br />
         First Name: <input type="text" asp-for="FirstName" />
+        &nbsp;
         Last Name: <input type="text" asp-for="LastName" />
+        &nbsp;
         <input type="submit" value="Filter" />
+        &nbsp;
         @Html.ActionLink("Reset All", "", new { @class = "btn btn-sm btn-primary" })
     </p>
 </form>
