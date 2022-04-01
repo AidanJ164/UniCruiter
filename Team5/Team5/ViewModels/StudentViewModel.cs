@@ -28,28 +28,32 @@ namespace UniCruiter.ViewModels
 
         public int Id { get; set; }
         
-        [Display(Name = "First Name")]
+        [Display(Name = "First Name:")]
         [StringLength(50, MinimumLength = 2)]
         [Required]
         public string FirstName { get; set; }  
 
-        [Display(Name = "Last Name")]
+        [Display(Name = "Last Name:")]
         [StringLength(50, MinimumLength = 2)]
         [Required]
         public string LastName { get; set; }
 
+        [Display(Name = "Major:")]
         [StringLength(50, MinimumLength = 2)]
         [Required]
         public string Major { get; set; }
 
+        [Display(Name = "Graduation Season:")]
         [StringLength(6, MinimumLength = 4)]
         [Required]
         public string Season { get; set; }
 
+        [Display(Name = "Graduation Year:")]
         [Range(2022, 3000)]
         [Required]
         public int Year { get; set; }
 
+        [Display(Name = "Email Address:")]
         [Required]
         public string Email { get; set; }
 
