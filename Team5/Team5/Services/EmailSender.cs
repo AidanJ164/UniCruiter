@@ -12,23 +12,23 @@ namespace UniCruiter.Services
     public class EmailSender : IEmailSender
     {
         private readonly ILogger _logger;
-        private readonly AuthMessageSenderOptions _optionsAccessor;
+
         public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor,
                            ILogger<EmailSender> logger)
         {
-            _optionsAccessor = optionsAccessor.Value;
+            Options = optionsAccessor.Value;
             _logger = logger;
         }
 
-        //public AuthMessageSenderOptions Options { get; }
+        public AuthMessageSenderOptions Options { get; } //Set with UserSecrets
 
         public async Task SendEmailAsync(string toEmail, string subject, string message)
         {
-            if (string.IsNullOrEmpty(_optionsAccessor.SendGridKey))
+            if (string.IsNullOrEmpty(Options.SendGridKey))
             {
                 throw new Exception("Null SendGridKey");
             }
-            await Execute(_optionsAccessor.SendGridKey, subject, message, toEmail);
+            await Execute(Options.SendGridKey, subject, message, toEmail);
         }
 
         public async Task Execute(string apiKey, string subject, string message, string toEmail)
