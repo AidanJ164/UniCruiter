@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="JunitXml.TestLogger" Version="3.0.110" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.12" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="4.1.0" />
@@ -27,9 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="UniCruiter">
-      <HintPath>..\UniCruiter\bin\Debug\net5.0\UniCruiter.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\UniCruiter\UniCruiter.csproj" />
   </ItemGroup>
 
 </Project>

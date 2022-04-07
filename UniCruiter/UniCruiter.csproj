@@ -34,4 +34,10 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="UniCruiter">
+      <HintPath>bin\Debug\net5.0\UniCruiter.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
