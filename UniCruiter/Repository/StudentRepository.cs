@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,10 +39,12 @@ namespace UniCruiter.Repository
 
         public async Task<IList<Student>> GetStudents(StudentViewModel studentViewModel)
         {
-            IQueryable<string> majorQuery = from m in _context.Student orderby m.Major select m.Major;
-            IQueryable<int> yearQuery = from y in _context.Student orderby y.Year select y.Year;
-            IQueryable<string> seasonQuery = from s in _context.Student orderby s.Season select s.Season;
-            
+            IEnumerable<string> majorQuery = from m in _context.Student orderby m.Major ascending select m.Major;
+            IEnumerable<int> yearQuery = from y in _context.Student orderby y.Year ascending select y.Year;
+            IEnumerable<string> seasonQuery = from s in _context.Student
+                                             orderby s.Season == "Winter", s.Season == "Fall", s.Season == "Summer", s.Season == "Spring"
+                                             select s.Season;
+
             var students = from s in _context.Student
                            select s;
 
@@ -77,9 +80,9 @@ namespace UniCruiter.Repository
                 students = students.Where(s => s.Year == studentViewModel.Year);
             }
 
-            studentViewModel.Majors = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(majorQuery.Distinct());
-            studentViewModel.Seasons = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(seasonQuery.Distinct());
-            studentViewModel.Years = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(yearQuery.Distinct());
+            studentViewModel.Majors = new SelectList(majorQuery.Distinct());
+            studentViewModel.Seasons = new SelectList(seasonQuery.Distinct());
+            studentViewModel.Years = new SelectList(yearQuery.Distinct());
 
             return await students.ToListAsync();
         }
