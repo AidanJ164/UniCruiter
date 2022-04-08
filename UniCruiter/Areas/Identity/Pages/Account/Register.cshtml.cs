@@ -48,6 +48,7 @@ namespace UniCruiter.Areas.Identity.Pages.Account
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
+            [RegularExpression(@"[A-Z0-9a-z._%+-]+@[A-Za-z0-9-]+\.(com|gov)", ErrorMessage = "Registration limited to .com and .gov")]
             public string Email { get; set; }
 
             [Required]
