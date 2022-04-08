@@ -80,6 +80,8 @@ namespace UniCruiter.Repository
                 students = students.Where(s => s.Year == studentViewModel.Year);
             }
 
+            students = students.OrderBy(s => s.LastName);
+
             studentViewModel.Majors = new SelectList(majorQuery.Distinct());
             studentViewModel.Seasons = new SelectList(seasonQuery.Distinct());
             studentViewModel.Years = new SelectList(yearQuery.Distinct());

@@ -41,19 +41,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
+                @Html.DisplayNameFor(model => model.FullName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Major)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Season)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Year)
+                @Html.DisplayNameFor(model => model.Graduation)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Email)
@@ -65,19 +59,13 @@
 @foreach (var item in Model.Students) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
+                @Html.DisplayFor(modelItem => item.FullName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Major)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Season)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Year)
+                @Html.DisplayFor(modelItem => item.Graduation)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
