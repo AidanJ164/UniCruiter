@@ -7,8 +7,8 @@ build:
   stage: build
   tags: 
     - csc340
-  #only:
-    #- main
+  only:
+    - main
   script:
     - cd Team5
     - dotnet restore
