@@ -10,7 +10,7 @@ build:
   only:
     - main
   script:
-    - cd Team5
+    - cd UniCruiter
     - dotnet restore
     - dotnet build --configuration Release
     - dotnet publish --configuration Release --output ../publish/
