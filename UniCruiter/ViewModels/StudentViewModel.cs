@@ -38,6 +38,9 @@ namespace UniCruiter.ViewModels
         [Required]
         public string LastName { get; set; }
 
+        [Display(Name = "Name:")]
+        public string FullName => FirstName + " " + LastName;
+
         [Display(Name = "Major:")]
         [StringLength(50, MinimumLength = 2)]
         [Required]
@@ -52,6 +55,10 @@ namespace UniCruiter.ViewModels
         [Range(2022, 3000)]
         [Required]
         public int Year { get; set; }
+
+        [Display(Name = "Graduation:")]
+        public string Graduation => Season + " " + Year;
+
 
         [Display(Name = "Email Address:")]
         [Required]
