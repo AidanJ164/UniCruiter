@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using UniCruiter.Models.Identity;
 
 namespace UniCruiter.Data
 {
-    public class UniCruiterContext : IdentityDbContext
+    public class UniCruiterContext : IdentityDbContext<ApplicationUser>
     {
         public UniCruiterContext (DbContextOptions<UniCruiterContext> options)
             : base(options)

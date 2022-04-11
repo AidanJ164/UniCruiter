@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using UniCruiter.Data;
+using UniCruiter.Models.Identity;
 using UniCruiter.Repository;
 using UniCruiter.Services;
 
@@ -29,7 +30,7 @@ namespace UniCruiter
             services.AddDbContext<UniCruiterContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("UniCruiterContext")));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<UniCruiterContext>();
 
             // used for SendGrid email service.

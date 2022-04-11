@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using UniCruiter.Models;
+using UniCruiter.Models.Identity;
 
 namespace UniCruiter.Data.SeedData
 {
@@ -41,25 +42,29 @@ namespace UniCruiter.Data.SeedData
             string recruiter1 = "test1@example.com";
             string recruiter2 = "test2@example.com";
 
-            var user1 = new IdentityUser
+            var user1 = new ApplicationUser
             {
                 UserName = recruiter1,
                 NormalizedUserName = recruiter1.ToUpper(),
                 Email = recruiter1,
                 NormalizedEmail = recruiter1.ToUpper(),
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                FirstName = "Recruiter1",
+                LastName = "Test"
             };
 
-            var user2 = new IdentityUser
+            var user2 = new ApplicationUser
             {
                 UserName = recruiter2,
                 NormalizedUserName = recruiter2.ToUpper(),
                 Email = recruiter2,
                 NormalizedEmail = recruiter2.ToUpper(),
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                FirstName = "Recruiter2",
+                LastName = "Test"
             };
 
-            PasswordHasher<IdentityUser> passwordHasher = new PasswordHasher<IdentityUser>();
+            PasswordHasher<ApplicationUser> passwordHasher = new PasswordHasher<ApplicationUser>();
             string passwordHash = passwordHasher.HashPassword(user1, "Test1!");
             user1.PasswordHash = passwordHash;
             user2.PasswordHash = passwordHash;
