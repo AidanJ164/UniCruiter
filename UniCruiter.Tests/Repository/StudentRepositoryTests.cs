@@ -44,6 +44,24 @@ namespace UniCruiter.Tests
         }
 
         [Fact]
+        public async void Get_Students_With_Comments()
+        {
+            // Arrange.
+            StudentViewModel svm = new StudentViewModel(new Student());
+
+            // Act.
+            IList<Student> students = await _repo.GetStudents(svm);
+
+            // Assert.
+            Assert.Equal(4, students.Count);
+
+            foreach (var student in students)
+            {
+                Assert.True(student.Comments.Count == 1);
+            }
+        }
+
+        [Fact]
         public async Task Get_Students_BySearch_None()
         {
             // Arrange.
@@ -171,6 +189,33 @@ namespace UniCruiter.Tests
         }
 
         [Fact]
+        public async Task Delete_Student_With_Comment()
+        {
+            // Arrange.
+            var viewModel = new StudentViewModel();
+
+            viewModel.FirstName = "Test";
+            viewModel.LastName = "Delete";
+            viewModel.CommentEnteredBy = null;
+            viewModel.CommentEnteredOn = DateTime.Now;
+            viewModel.CommentText = "This is a test comment";
+
+            // Act.
+            Student newStudent = await _repo.InsertStudent(viewModel);
+
+            viewModel.Id = newStudent.Id;
+            _ = await _repo.InsertComment(viewModel);
+
+            int id = newStudent.Id;
+            await _repo.DeleteStudent(id);
+
+            Student student = await _repo.GetStudentByID(id);
+
+            // Assert.
+            Assert.Null(student);
+        }
+
+        [Fact]
         public async Task Get_Student_ById()
         {
             // Arrange.
@@ -197,6 +242,19 @@ namespace UniCruiter.Tests
         }
 
         [Fact]
+        public async Task Get_Student_ById_With_Comments()
+        {
+            // Arrange.
+            int studentId = 1;
+
+            // Act.
+            Student student = await _repo.GetStudentByID(studentId);
+
+            // Assert.
+            Assert.True(student.Comments.Count() > 0);
+        }
+
+        [Fact]
         public async Task Get_Student_ById_After_Insert()
         {
             // Arrange.
@@ -216,6 +274,44 @@ namespace UniCruiter.Tests
 
             // Cleanup.
             await _repo.DeleteStudent(newStudent.Id);
+        }
+
+        [Fact]
+        public async Task Get_Comments()
+        {
+            // Arrange.
+
+            // Act.
+            IList<Comment> comments = await _repo.GetComments();
+
+            // Assert.
+            Assert.Equal(4, comments.Count);
+        }
+
+        [Fact]
+        public async Task Insert_Comment()
+        {
+            // Arrange.
+            int studentId = 1;
+            DateTime commentEnteredOn = DateTime.Now;
+            string commentText = "Good interview.";
+
+            var viewModel = new StudentViewModel();
+
+            viewModel.Id = studentId;
+            viewModel.CommentEnteredOn = commentEnteredOn;
+            viewModel.CommentEnteredBy = null;
+            viewModel.CommentText = commentText;
+
+            // Act.
+            Comment comment = await _repo.InsertComment(viewModel);
+
+            // Assert.
+            Assert.Equal(commentEnteredOn, comment.EnteredOn);
+            Assert.Equal(commentText, comment.Text);
+
+            // Cleanup.
+            await _repo.DeleteComment(comment.Id);
         }
     }
 }
