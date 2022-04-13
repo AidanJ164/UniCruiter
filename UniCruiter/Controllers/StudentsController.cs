@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
+using UniCruiter.Models.Identity;
 using UniCruiter.Repository;
 using UniCruiter.ViewModels;
 
@@ -10,10 +13,12 @@ namespace UniCruiter.Controllers
     public class StudentsController : Controller
     {
         private readonly IStudentRepository _studentRepository;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public StudentsController(IStudentRepository studentRepository)
+        public StudentsController(IStudentRepository studentRepository, UserManager<ApplicationUser> userManager)
         {
             _studentRepository = studentRepository;
+            _userManager = userManager;
         }
 
         // GET: Students
@@ -64,6 +69,36 @@ namespace UniCruiter.Controllers
             }
 
             return View();
+        }
+
+        // GET: Student/CreateComment
+        public async Task<IActionResult> CreateComment(int Id)
+        {
+            StudentViewModel studentViewModel = new StudentViewModel(await _studentRepository.GetStudentByID(Id));
+
+            return View(studentViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateComment([Bind("Id,FirstName,LastName,CommentText")] StudentViewModel studentViewModel)
+        {
+            if (studentViewModel.CommentText != null)
+            {
+                studentViewModel.CommentEnteredOn = DateTime.Now;
+                studentViewModel.CommentEnteredBy = await _userManager.GetUserAsync(User);
+                await _studentRepository.InsertComment(studentViewModel);
+            }
+            return RedirectToAction(nameof(Details), new { studentViewModel.Id });
+        }
+
+        // GET: Student/DeleteComment/5
+        public async Task<IActionResult> DeleteComment(int id, int studentId)
+        {
+            var Id = studentId;
+
+            await _studentRepository.DeleteComment(id);
+            return RedirectToAction(nameof(Details), new { Id });
         }
 
         // GET: Students/Edit/5

@@ -13,5 +13,9 @@ namespace UniCruiter.Repository
         Task<Student> InsertStudent(StudentViewModel studentViewModel);
         Task DeleteStudent(int studentID);
         Task<Student> UpdateStudent(StudentViewModel studentViewModel);
+        Task<IList<Comment>> GetComments();
+        Task<Comment> InsertComment(StudentViewModel studentViewModel);
+        Task DeleteComment(int commentID);
+        Task DeleteUserComments(string userID);
     }
 }

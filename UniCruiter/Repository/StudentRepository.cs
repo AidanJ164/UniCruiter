@@ -34,7 +34,9 @@ namespace UniCruiter.Repository
 
         public async Task<Student> GetStudentByID(int studentId)
         {
-            return await _context.Student.FirstOrDefaultAsync(s => s.Id == studentId);
+            return await _context.Student.Include(c => c.Comments.OrderByDescending(o => o.EnteredOn))
+                                         .ThenInclude(u => u.ApplicationUser)
+                                         .FirstOrDefaultAsync(s => s.Id == studentId);
         }
 
         public async Task<IList<Student>> GetStudents(StudentViewModel studentViewModel)
@@ -86,7 +88,7 @@ namespace UniCruiter.Repository
             studentViewModel.Seasons = new SelectList(seasonQuery.Distinct());
             studentViewModel.Years = new SelectList(yearQuery.Distinct());
 
-            return await students.ToListAsync();
+            return await students.Include(c => c.Comments).ToListAsync();
         }
 
         public async Task<Student> InsertStudent(StudentViewModel studentViewModel)
@@ -99,7 +101,7 @@ namespace UniCruiter.Repository
                 Season = studentViewModel.Season,
                 Year = studentViewModel.Year,
                 Email = studentViewModel.Email,
-        };
+            };
 
             _context.Add(student);
             await _context.SaveChangesAsync();
@@ -145,7 +147,9 @@ namespace UniCruiter.Repository
         public async Task DeleteStudent(int studentID)
         {
 
-            var student = _context.Student.FirstOrDefault(s => s.Id == studentID);
+            var student = _context.Student.Include(c => c.Comments).FirstOrDefault(s => s.Id == studentID);
+
+            _context.Comment.RemoveRange(student.Comments);
 
             _context.Student.Remove(student);
 
@@ -156,6 +160,46 @@ namespace UniCruiter.Repository
         private bool StudentExists(int id)
         {
             return _context.Student.Any(s => s.Id == id);
+        }
+
+        public async Task<IList<Comment>> GetComments() 
+        {
+            return await _context.Comment.Include(s => s.Student).Include(u => u.ApplicationUser).ToListAsync();
+        }
+
+        public async Task<Comment> InsertComment(StudentViewModel studentViewModel)
+        {
+            Student student = await _context.Student.FindAsync(studentViewModel.Id);
+
+            Comment comment = new()
+            {
+                Student = student,
+                ApplicationUser = studentViewModel.CommentEnteredBy,
+                EnteredOn = studentViewModel.CommentEnteredOn,
+                Text = studentViewModel.CommentText
+            };
+
+            _context.Comment.Add(comment);
+            await _context.SaveChangesAsync();
+
+            return comment;
+        }
+
+        public async Task DeleteComment(int commentID) 
+        {
+            Comment comment = await _context.Comment.FindAsync(commentID);
+
+            _context.Comment.Remove(comment);
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteUserComments(string userID)
+        {
+            IList<Comment> comments = await _context.Comment.Include(u => u.ApplicationUser).Where(c => c.ApplicationUser.Id == userID).ToListAsync();
+
+            _context.Comment.RemoveRange(comments);
+            await _context.SaveChangesAsync();
         }
     }
 }

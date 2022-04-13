@@ -52,3 +52,51 @@
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CommentText)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CommentEnteredOn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CommentEnteredBy)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Comments != null)
+            {
+                @foreach (var item in Model.Comments)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Text )
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EnteredOn )
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EnteredBy )
+                        </td> 
+                        <td>
+                            <a asp-action="DeleteComment"
+                               asp-route-id="@item.Id"
+                               asp-route-studentId="@Model.Id">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <p>
+        <a asp-controller="Students" asp-action="CreateComment" asp-route-id="@Model.Id">Add Comment</a>
+    </p>
+</div>
