@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using UniCruiter.Models;
 using UniCruiter.Models.Identity;
 
 namespace UniCruiter.Data
@@ -11,6 +12,7 @@ namespace UniCruiter.Data
         {
         }
 
-        public DbSet<UniCruiter.Models.Student> Student { get; set; }
+        public DbSet<Student> Student { get; set; }
+        public DbSet<Comment> Comment{ get; set; }
     }
 }

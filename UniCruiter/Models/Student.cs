@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace UniCruiter.Models
@@ -14,5 +14,6 @@ namespace UniCruiter.Models
         public string Graduation => Season + " " + Year;
         public int Year { get; set; }
         public string Email { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

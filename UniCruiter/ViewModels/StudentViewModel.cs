@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using UniCruiter.Models;
+using UniCruiter.Models.Identity;
+
 
 namespace UniCruiter.ViewModels
 {
@@ -23,6 +26,7 @@ namespace UniCruiter.ViewModels
                 Season = student.Season;
                 Year = student.Year;
                 Email = student.Email;
+                Comments = student.Comments;
             }
         }
 
@@ -64,9 +68,21 @@ namespace UniCruiter.ViewModels
         [Required]
         public string Email { get; set; }
 
+        [Display(Name = "Comment")]
+        public string CommentText { get; set; }
+
+        [Display(Name = "Date")]
+        public DateTime CommentEnteredOn { get; set; }
+
+        [Display(Name = "User")]
+        public ApplicationUser CommentEnteredBy { get; set; }
+
         public IEnumerable<Student> Students { get; set; }
+        public IEnumerable<Comment> Comments { get; set; }
         public SelectList Majors;
         public SelectList Years;
         public SelectList Seasons;
+        
+
     }
 }
