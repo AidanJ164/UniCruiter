@@ -13,5 +13,6 @@
         public static string FALL = "Fall";
         public static int GRAD2022 = 2022;
         public static int GRAD2023 = 2023;
+        public static string COMMENT_TEXT = "This is a really good comment.";
     }
 }

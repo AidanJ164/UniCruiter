@@ -4,6 +4,7 @@ using UniCruiter.Tests.Helpers;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Data.Common;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
 namespace UniCruiter.Tests.Fixtures
@@ -54,6 +55,13 @@ namespace UniCruiter.Tests.Fixtures
 
                         addStudents(context);
                         context.SaveChanges();
+
+                        foreach (var student in context.Student.ToArray())
+                        {
+                            addComment(context, student);
+                        }
+
+                        context.SaveChanges();
                     }
 
                     _databaseInitialized = true;
@@ -69,6 +77,19 @@ namespace UniCruiter.Tests.Fixtures
                 new Student {FirstName = Constants.FIRST_NAME, LastName = Constants.LAST_NAME_3, Major = Constants.CSC, Season = Constants.FALL, Year = Constants.GRAD2022},
                 new Student {FirstName = Constants.FIRST_NAME, LastName = Constants.LAST_NAME_4, Major = Constants.CENG, Season = Constants.SPRING, Year = Constants.GRAD2023}
                 );
+        }
+
+        private void addComment (UniCruiterContext context, Student student)
+        {
+            context.Comment
+                .Add(
+                    new Comment
+                    {
+                        EnteredOn = DateTime.Now,
+                        Text = Constants.COMMENT_TEXT,
+                        Student = student,
+                        ApplicationUser = context.Users.FirstOrDefault()
+                    });
         }
 
     }
