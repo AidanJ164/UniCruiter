@@ -74,7 +74,7 @@ namespace UniCruiter.Controllers
         // GET: Student/CreateComment
         public async Task<IActionResult> CreateComment(int Id)
         {
-            StudentViewModel studentViewModel = new StudentViewModel(await _studentRepository.GetStudentByID(Id));
+            StudentViewModel studentViewModel = new(await _studentRepository.GetStudentByID(Id));
 
             return View(studentViewModel);
         }

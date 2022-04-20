@@ -10,7 +10,7 @@ using UniCruiter.ViewModels;
 
 namespace UniCruiter.Repository
 {
-    public class StudentRepository : IStudentRepository, IDisposable
+    public class StudentRepository : IStudentRepository
     {
         private UniCruiterContext _context;
 
@@ -32,11 +32,11 @@ namespace UniCruiter.Repository
         }
 
 
-        public async Task<Student> GetStudentByID(int studentId)
+        public async Task<Student> GetStudentByID(int studentID)
         {
             return await _context.Student.Include(c => c.Comments.OrderByDescending(o => o.EnteredOn))
                                          .ThenInclude(u => u.ApplicationUser)
-                                         .FirstOrDefaultAsync(s => s.Id == studentId);
+                                         .FirstOrDefaultAsync(s => s.Id == studentID);
         }
 
         public async Task<IList<Student>> GetStudents(StudentViewModel studentViewModel)
@@ -44,8 +44,8 @@ namespace UniCruiter.Repository
             IEnumerable<string> majorQuery = from m in _context.Student orderby m.Major ascending select m.Major;
             IEnumerable<int> yearQuery = from y in _context.Student orderby y.Year ascending select y.Year;
             IEnumerable<string> seasonQuery = from s in _context.Student
-                                             orderby s.Season == "Winter", s.Season == "Fall", s.Season == "Summer", s.Season == "Spring"
-                                             select s.Season;
+                                              orderby s.Season == "Winter", s.Season == "Fall", s.Season == "Summer", s.Season == "Spring"
+                                              select s.Season;
 
             var students = from s in _context.Student
                            select s;
@@ -57,6 +57,7 @@ namespace UniCruiter.Repository
                     s.FirstName.StartsWith(studentViewModel.FirstName)
                 );
             }
+
             if (!string.IsNullOrEmpty(studentViewModel.LastName))
             {
                 students = students.Where(s =>
@@ -75,7 +76,7 @@ namespace UniCruiter.Repository
             {
                 students = students.Where(s => s.Season == studentViewModel.Season);
             }
-            
+
             //Filter by Grad Year
             if (studentViewModel.Year != 0)
             {
@@ -157,12 +158,7 @@ namespace UniCruiter.Repository
 
         }
 
-        private bool StudentExists(int id)
-        {
-            return _context.Student.Any(s => s.Id == id);
-        }
-
-        public async Task<IList<Comment>> GetComments() 
+        public async Task<IList<Comment>> GetComments()
         {
             return await _context.Comment.Include(s => s.Student).Include(u => u.ApplicationUser).ToListAsync();
         }
@@ -185,7 +181,7 @@ namespace UniCruiter.Repository
             return comment;
         }
 
-        public async Task DeleteComment(int commentID) 
+        public async Task DeleteComment(int commentID)
         {
             Comment comment = await _context.Comment.FindAsync(commentID);
 
@@ -200,6 +196,11 @@ namespace UniCruiter.Repository
 
             _context.Comment.RemoveRange(comments);
             await _context.SaveChangesAsync();
+        }
+
+        private bool StudentExists(int id)
+        {
+            return _context.Student.Any(s => s.Id == id);
         }
     }
 }

@@ -1,11 +1,11 @@
-﻿using UniCruiter.Data;
-using UniCruiter.Models;
-using UniCruiter.Tests.Helpers;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Data.Common;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
+using UniCruiter.Data;
+using UniCruiter.Models;
+using UniCruiter.Tests.Helpers;
 
 namespace UniCruiter.Tests.Fixtures
 {
@@ -44,10 +44,10 @@ namespace UniCruiter.Tests.Fixtures
 
         private void Seed()
         {
-            lock(_lock)
+            lock (_lock)
             {
-                if(!_databaseInitialized)
-                {  
+                if (!_databaseInitialized)
+                {
                     using (var context = CreateContext())
                     {
                         context.Database.EnsureDeleted();
@@ -72,14 +72,14 @@ namespace UniCruiter.Tests.Fixtures
         private void addStudents(UniCruiterContext context)
         {
             context.Student.AddRange(
-                new Student {FirstName = Constants.FIRST_NAME, LastName = Constants.LAST_NAME_1, Major = Constants.CSC, Season = Constants.FALL, Year = Constants.GRAD2022},
-                new Student {FirstName = Constants.FIRST_NAME, LastName = Constants.LAST_NAME_2, Major = Constants.CENG, Season = Constants.SPRING, Year = Constants.GRAD2023},
-                new Student {FirstName = Constants.FIRST_NAME, LastName = Constants.LAST_NAME_3, Major = Constants.CSC, Season = Constants.FALL, Year = Constants.GRAD2022},
-                new Student {FirstName = Constants.FIRST_NAME, LastName = Constants.LAST_NAME_4, Major = Constants.CENG, Season = Constants.SPRING, Year = Constants.GRAD2023}
+                new Student { FirstName = Constants.FIRST_NAME, LastName = Constants.LAST_NAME_1, Major = Constants.CSC, Season = Constants.FALL, Year = Constants.GRAD2022 },
+                new Student { FirstName = Constants.FIRST_NAME, LastName = Constants.LAST_NAME_2, Major = Constants.CENG, Season = Constants.SPRING, Year = Constants.GRAD2023 },
+                new Student { FirstName = Constants.FIRST_NAME, LastName = Constants.LAST_NAME_3, Major = Constants.CSC, Season = Constants.FALL, Year = Constants.GRAD2022 },
+                new Student { FirstName = Constants.FIRST_NAME, LastName = Constants.LAST_NAME_4, Major = Constants.CENG, Season = Constants.SPRING, Year = Constants.GRAD2023 }
                 );
         }
 
-        private void addComment (UniCruiterContext context, Student student)
+        private void addComment(UniCruiterContext context, Student student)
         {
             context.Comment
                 .Add(

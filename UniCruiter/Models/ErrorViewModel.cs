@@ -1,5 +1,3 @@
-using System;
-
 namespace UniCruiter.Models
 {
     public class ErrorViewModel
