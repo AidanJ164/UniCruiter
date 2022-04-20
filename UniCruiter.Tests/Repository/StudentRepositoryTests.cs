@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using UniCruiter.Tests.Fixtures;
-using UniCruiter.Tests.Helpers;
 using UniCruiter.Models;
 using UniCruiter.Repository;
+using UniCruiter.Tests.Fixtures;
+using UniCruiter.Tests.Helpers;
 using UniCruiter.ViewModels;
 using Xunit;
 
@@ -27,7 +25,7 @@ namespace UniCruiter.Tests
         public async Task Get_Students()
         {
             // Arrange.
-            StudentViewModel svm = new StudentViewModel(new Student());
+            StudentViewModel svm = new();
 
             // Act.
             IList<Student> students = await _repo.GetStudents(svm);
@@ -44,10 +42,10 @@ namespace UniCruiter.Tests
         }
 
         [Fact]
-        public async void Get_Students_With_Comments()
+        public async Task Get_Students_With_Comments()
         {
             // Arrange.
-            StudentViewModel svm = new StudentViewModel(new Student());
+            StudentViewModel svm = new();
 
             // Act.
             IList<Student> students = await _repo.GetStudents(svm);
@@ -65,9 +63,10 @@ namespace UniCruiter.Tests
         public async Task Get_Students_BySearch_None()
         {
             // Arrange.
-            StudentViewModel svm = new StudentViewModel(new Student());
-
-            svm.LastName = "qqqxxx";
+            StudentViewModel svm = new()
+            {
+                LastName = "qqqxxx"
+            };
 
             // Act.
             IList<Student> students = await _repo.GetStudents(svm);
@@ -80,7 +79,7 @@ namespace UniCruiter.Tests
         public async Task Get_Students_BySearch_Many()
         {
             // Arrange.
-            StudentViewModel svm = new StudentViewModel(new Student());
+            StudentViewModel svm = new();
 
             // Act.
             IList<Student> students = await _repo.GetStudents(svm);
@@ -100,9 +99,10 @@ namespace UniCruiter.Tests
         public async Task Get_Students_BySearch_Single()
         {
             // Arrange.
-            StudentViewModel svm = new StudentViewModel(new Student());
-
-            svm.LastName = Constants.LAST_NAME_1;
+            StudentViewModel svm = new()
+            {
+                LastName = Constants.LAST_NAME_1
+            };
 
             // Act.
             IList<Student> students = await _repo.GetStudents(svm);
@@ -192,13 +192,14 @@ namespace UniCruiter.Tests
         public async Task Delete_Student_With_Comment()
         {
             // Arrange.
-            var viewModel = new StudentViewModel();
-
-            viewModel.FirstName = "Test";
-            viewModel.LastName = "Delete";
-            viewModel.CommentEnteredBy = null;
-            viewModel.CommentEnteredOn = DateTime.Now;
-            viewModel.CommentText = "This is a test comment";
+            var viewModel = new StudentViewModel
+            {
+                FirstName = "Test",
+                LastName = "Delete",
+                CommentEnteredBy = null,
+                CommentEnteredOn = DateTime.Now,
+                CommentText = "This is a test comment"
+            };
 
             // Act.
             Student newStudent = await _repo.InsertStudent(viewModel);
@@ -251,7 +252,7 @@ namespace UniCruiter.Tests
             Student student = await _repo.GetStudentByID(studentId);
 
             // Assert.
-            Assert.True(student.Comments.Count() > 0);
+            Assert.True(student.Comments.Count > 0);
         }
 
         [Fact]
@@ -296,12 +297,13 @@ namespace UniCruiter.Tests
             DateTime commentEnteredOn = DateTime.Now;
             string commentText = "Good interview.";
 
-            var viewModel = new StudentViewModel();
-
-            viewModel.Id = studentId;
-            viewModel.CommentEnteredOn = commentEnteredOn;
-            viewModel.CommentEnteredBy = null;
-            viewModel.CommentText = commentText;
+            var viewModel = new StudentViewModel
+            {
+                Id = studentId,
+                CommentEnteredOn = commentEnteredOn,
+                CommentEnteredBy = null,
+                CommentText = commentText
+            };
 
             // Act.
             Comment comment = await _repo.InsertComment(viewModel);

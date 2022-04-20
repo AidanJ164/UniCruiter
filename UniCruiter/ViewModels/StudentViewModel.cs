@@ -15,9 +15,9 @@ namespace UniCruiter.ViewModels
 
         }
 
-        public StudentViewModel( Student student )
+        public StudentViewModel(Student student)
         {
-            if(student != null)
+            if (student != null)
             {
                 Id = student.Id;
                 FirstName = student.FirstName;
@@ -31,11 +31,11 @@ namespace UniCruiter.ViewModels
         }
 
         public int Id { get; set; }
-        
+
         [Display(Name = "First Name:")]
         [StringLength(50, MinimumLength = 2)]
         [Required]
-        public string FirstName { get; set; }  
+        public string FirstName { get; set; }
 
         [Display(Name = "Last Name:")]
         [StringLength(50, MinimumLength = 2)]
@@ -82,7 +82,7 @@ namespace UniCruiter.ViewModels
         public SelectList Majors;
         public SelectList Years;
         public SelectList Seasons;
-        
+
 
     }
 }
