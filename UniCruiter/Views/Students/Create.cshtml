@@ -28,14 +28,25 @@
                 <span asp-validation-for="Major" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Season" class="control-label"></label>
-                <input asp-for="Season" class="form-control" />
-                <span asp-validation-for="Season" class="text-danger"></span>
+                Graduation Season/Year:
             </div>
             <div class="form-group">
-                <label asp-for="Year" class="control-label"></label>
-                <input asp-for="Year" class="form-control" />
-                <span asp-validation-for="Year" class="text-danger"></span>
+                @Html.DropDownList(
+                    "Season",
+                    new SelectList(new[] { "Spring", "Summer", "Fall", "Winter" }),
+                    new
+                         {
+                        style = "width: fit-content"
+                    }
+                )
+                @Html.DropDownList(
+                    "Year",
+                    new SelectList(new[] { "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }),
+                    new
+                    {
+                        style = "width: fit-content"
+                    }
+                )
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
