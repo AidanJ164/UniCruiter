@@ -39,6 +39,9 @@ namespace UniCruiter.Areas.Identity.Pages.Account.Manage
 
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
+
+            [Display(Name = "Company Name")]
+            public string CompanyName { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
@@ -50,9 +53,10 @@ namespace UniCruiter.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber,
                 FirstName = user.FirstName,
-                LastName = user.LastName
+                LastName = user.LastName,
+                PhoneNumber = phoneNumber,
+                CompanyName = user.CompanyName
             };
         }
 
@@ -95,6 +99,7 @@ namespace UniCruiter.Areas.Identity.Pages.Account.Manage
 
             user.FirstName = string.IsNullOrEmpty(Input.FirstName) ? "" : Input.FirstName.Trim();
             user.LastName = string.IsNullOrEmpty(Input.LastName) ? "" : Input.LastName.Trim();
+            user.CompanyName = string.IsNullOrEmpty(Input.CompanyName) ? "" : Input.CompanyName.Trim();
 
             var updateUserResult = await _userManager.UpdateAsync(user);
             if (!updateUserResult.Succeeded)

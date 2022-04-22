@@ -9,5 +9,7 @@ namespace UniCruiter.Models.Identity
 
         [PersonalData]
         public string LastName { get; set; }
+
+        public string CompanyName { get; set; }
     }
 }
