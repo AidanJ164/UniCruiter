@@ -65,6 +65,14 @@ namespace UniCruiter.Repository
                 );
             }
 
+            //Filter by Email
+            if (!string.IsNullOrEmpty(studentViewModel.Email))
+            {
+                students = students.Where(s =>
+                    s.Email.Contains(studentViewModel.Email)
+                );
+            }
+
             //Filter by Major
             if (!string.IsNullOrEmpty(studentViewModel.Major))
             {
