@@ -6,12 +6,14 @@
 
 <h1>Student List</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-
 <form asp-controller="Students" asp-action="Index" method="get">
     <p>
+        Email Address: <input type="text" asp-for="Email" />
+        <br />
+        First Name: <input type="text" asp-for="FirstName" />
+        &nbsp;
+        Last Name: <input type="text" asp-for="LastName" />
+        <br />
         <label asp-for="Major"></label>
         <select asp-for="Major" asp-items="Model.Majors">
             <option value="">All Majors</option>
@@ -26,15 +28,12 @@
         <select asp-for="Season" asp-items="Model.Seasons">
             <option value="">All Seasons</option>
         </select>
-
         <br />
-        First Name: <input type="text" asp-for="FirstName" />
-        &nbsp;
-        Last Name: <input type="text" asp-for="LastName" />
-        &nbsp;
         <input type="submit" value="Filter" />
         &nbsp;
-        @Html.ActionLink("Reset All", "", new { @class = "btn btn-sm btn-primary" })
+        <a asp-action="Index">Reset All</a>
+        &nbsp;
+        <a asp-action="Create">Create New</a>
     </p>
 </form>
 
