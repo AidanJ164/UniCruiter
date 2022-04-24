@@ -5,7 +5,6 @@
 }
 
 <h1>Student List</h1>
-
 <form asp-controller="Students" asp-action="Index" method="get">
     <p>
         Email Address: <input type="text" asp-for="Email" />
@@ -29,38 +28,17 @@
             <option value="">All Seasons</option>
         </select>
         <br />
-        <input type="submit" value="Filter" />
+        <a asp-action="CardIndex">Switch to Card View</a>
+        &nbsp;
+        <a asp-action="Create">Add New Student</a>
         &nbsp;
         <a asp-action="Index">Reset Filters</a>
         &nbsp;
-        <a asp-action="Create">Add New Student</a>
+        <input type="submit" value="Filter" />
     </p>
 </form>
 
-<div class="row row-cols-1 row-cols-md-2 g-4">
-    @foreach (var item in Model.Students)
-    {
-        <div class="card border-dark mb-3" style="width:fit-content; height:fit-content;">
-            <h5 class="card-title">@Html.DisplayFor(modelItem => item.FullName)</h5>
-            <div class="card-body">
-                <p>@Html.DisplayFor(modelItem => item.Major)</p>
-                <p>
-                    @Html.DisplayFor(modelItem => item.Season)
-                    @Html.DisplayFor(modelItem => item.Year)
-                </p>
-                <p>@Html.DisplayFor(modelItem => item.Email)</p>
-                <div class="btn-group">
-                    <a asp-action="CreateComment" asp-route-id="@item.Id" class="btn btn-outline-primary">Comment</a>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-primary">Delete</a>
-                </div>
-            </div>
-        </div>
-    }
-</div>
-
-@*<table class="table">
+<table class="table">
         <thead>
             <tr>
                 <th>
@@ -102,6 +80,6 @@
                 </tr>
             }
         </tbody>
-    </table>*@
+    </table>
 
 
