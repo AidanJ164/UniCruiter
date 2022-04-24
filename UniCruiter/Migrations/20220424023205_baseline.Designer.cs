@@ -10,8 +10,8 @@ using UniCruiter.Data;
 namespace UniCruiter.Migrations
 {
     [DbContext(typeof(UniCruiterContext))]
-    [Migration("20220410234536_Applicationuser")]
-    partial class Applicationuser
+    [Migration("20220424023205_baseline")]
+    partial class baseline
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -156,6 +156,34 @@ namespace UniCruiter.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("UniCruiter.Models.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("EnteredOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("Comment");
+                });
+
             modelBuilder.Entity("UniCruiter.Models.Identity.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -163,6 +191,9 @@ namespace UniCruiter.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
+
+                    b.Property<string>("CompanyName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -306,6 +337,26 @@ namespace UniCruiter.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("UniCruiter.Models.Comment", b =>
+                {
+                    b.HasOne("UniCruiter.Models.Identity.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("UniCruiter.Models.Student", "Student")
+                        .WithMany("Comments")
+                        .HasForeignKey("StudentId");
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("UniCruiter.Models.Student", b =>
+                {
+                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }
