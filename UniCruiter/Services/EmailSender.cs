@@ -36,7 +36,7 @@ namespace UniCruiter.Services
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("4dakota.games@gmail.com", "UniCruiter"),
+                From = new EmailAddress("brian.butterfield@sdsmt.edu", "UniCruiter"),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message

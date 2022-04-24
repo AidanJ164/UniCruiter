@@ -4,6 +4,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using UniCruiter.Data.SeedData;
+using Azure.Identity;
+using Microsoft.Extensions.Configuration;
 
 namespace UniCruiter
 {
@@ -34,6 +36,14 @@ namespace UniCruiter
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((context, config) =>
+                {
+                    var vaultUrl = Environment.GetEnvironmentVariable("VaultUri");
+                    if (vaultUrl != null)
+                    {
+                        config.AddAzureKeyVault(new Uri(vaultUrl), new DefaultAzureCredential());
+                    }
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
