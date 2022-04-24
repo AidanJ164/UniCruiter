@@ -23,7 +23,7 @@
             <option value="">All Years</option>
         </select>
         &nbsp;
-        <label asp-for="Season"></label>
+        Season:
         <select asp-for="Season" asp-items="Model.Seasons">
             <option value="">All Seasons</option>
         </select>
@@ -32,7 +32,7 @@
         &nbsp;
         <a asp-action="Create">Add New Student</a>
         &nbsp;
-        <a asp-action="Index">Reset Filters</a>
+        <a asp-action="CardIndex">Reset Filters</a>
         &nbsp;
         <input type="submit" value="Filter" />
     </p>
