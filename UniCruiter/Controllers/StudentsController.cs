@@ -29,6 +29,13 @@ namespace UniCruiter.Controllers
             return View(studentViewModel);
         }
 
+        public async Task<IActionResult> CardIndex(StudentViewModel studentViewModel)
+        {
+            studentViewModel.Students = await _studentRepository.GetStudents(studentViewModel);
+
+            return View(studentViewModel);
+        }
+
         // GET: Students/Details/5
         public async Task<IActionResult> Details(int? id)
         {
